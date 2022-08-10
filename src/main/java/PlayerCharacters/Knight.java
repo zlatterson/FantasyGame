@@ -2,7 +2,7 @@ package PlayerCharacters;
 
 import java.util.ArrayList;
 
-public class Knight extends Player implements IAttack,IDefend{
+public class Knight extends Player {
     private ArrayList<SpellType> spells;
     private WeaponType currentWeapon;
     public Knight(String name, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
@@ -20,12 +20,18 @@ public class Knight extends Player implements IAttack,IDefend{
     public void setCurrentWeapon(WeaponType newWeapon){
         this.currentWeapon = newWeapon;
     }
-    public void attack(IDefend defender){
-        defender.takeDamage(this.currentWeapon.getPower());
+
+    public void useCleave(IDefend defender){
+        int payload = this.getPower() + this.currentWeapon.getPower() + SpellType.CLEAVE.getDamage();
+        defender.takeDamage(payload);
     }
-    public void takeDamage(int damage){
-        int health = this.getHealth();
-        health -= damage;
-        this.setHealth(health);
+
+    public void useStab(IDefend defender){
+        int payload = this.currentWeapon.getPower() * 2;
+        defender.takeDamage(payload);
+    }
+
+    public void die(IAttack attacker){
+
     }
 }

@@ -1,6 +1,6 @@
 package PlayerCharacters;
 
-public abstract class Player {
+public abstract class Player implements IAttack, IDefend{
     private String name;
     private int health;
     private int power;
@@ -53,5 +53,18 @@ public abstract class Player {
 
     public void setClarity(int clarity) {
         this.clarity = clarity;
+    }
+    public void attack(IDefend defender){
+        defender.takeDamage(this.getPower());
+    }
+
+    public void takeDamage(int damage){
+        int health = this.getHealth();
+        health -= damage;
+        if (health <= 0){
+            this.setHealth(0);
+        }else {
+            this.setHealth(health);
+        }
     }
 }
