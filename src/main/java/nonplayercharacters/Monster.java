@@ -23,7 +23,7 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems, IGiveMoney {
         this.health = health;
         this.power = power;
         this.items = new ArrayList<>();
-        potion = new Potion("Health Potion",105,20,100);
+        potion = new Potion("Weak Potion",105,20,100);
         items.add(potion);
         items.add(potion);
     }
@@ -44,12 +44,11 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems, IGiveMoney {
         defender.takeDamage(this.getPower());
     }
     public void takeDamage(int damage){
-        int health = this.getHealth();
-        health -= damage;
-        if (health <= 0){
+        int payload = this.getHealth() - damage;
+        if (payload <= 0){
             this.setHealth(0);
         }else {
-            this.setHealth(health);
+            this.setHealth(payload);
         }
     }
 

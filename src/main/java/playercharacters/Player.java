@@ -87,12 +87,11 @@ public abstract class Player implements IBasicAttack, IDefend, ILootItems, IGive
     }
 
     public void takeDamage(int damage){
-        int health = this.getHealth();
-        health -= damage;
-        if (health <= 0){
+        int payload = this.getHealth() - damage;
+        if (payload <= 0){
             this.setHealth(0);
         }else {
-            this.setHealth(health);
+            this.setHealth(payload);
         }
     }
     public void addItem(Item item){
