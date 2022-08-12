@@ -12,7 +12,7 @@ public class MonsterTest {
     @Before
     public void before(){
         monster = new Monster("Goblin",100,10);
-        knight = new Knight("Gimli",100,10,0,0, WeaponType.AXE);
+        knight = new Knight("Gimli",100,100,10,0,0, WeaponType.AXE);
     }
     @Test
     public void hasHealth(){

@@ -5,13 +5,15 @@ import behaviours.IDefend;
 
 public abstract class Player implements IBasicAttack, IDefend {
     private String name;
+    private int maxHealth;
     private int health;
     private int power;
     private int magic;
     private int clarity;
 
-    public Player(String name, int health, int power, int magic, int clarity) {
+    public Player(String name, int maxHealth, int health, int power, int magic, int clarity) {
         this.name = name;
+        this.maxHealth = maxHealth;
         this.health = health;
         this.power = power;
         this.magic = magic;
@@ -24,6 +26,14 @@ public abstract class Player implements IBasicAttack, IDefend {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public int getHealth() {

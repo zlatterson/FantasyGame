@@ -5,8 +5,8 @@ import behaviours.IDefend;
 public class Knight extends Player {
 //    private ArrayList<SpellType> spells;
     private WeaponType currentWeapon;
-    public Knight(String name, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
-        super(name, health, power, magic, clarity);
+    public Knight(String name, int healthMax, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
+        super(name, healthMax, health, power, magic, clarity);
         this.currentWeapon = currentWeapon;
 //        this.spells = new ArrayList<>();
 //        spells.add(SpellType.CLEAVE);

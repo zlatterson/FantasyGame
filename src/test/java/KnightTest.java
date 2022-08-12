@@ -10,8 +10,8 @@ public class KnightTest {
     Knight victim;
     @Before
     public void before(){
-        knight = new Knight("Aragorn",100,10,0,0, WeaponType.SWORD);
-        victim = new Knight("Timmy",100,10,0,0,WeaponType.SWORD);
+        knight = new Knight("Aragorn",100,100,10,0,0, WeaponType.SWORD);
+        victim = new Knight("Timmy",100,100,10,0,0,WeaponType.SWORD);
     }
     @Test
     public void hasSword(){
