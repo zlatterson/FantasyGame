@@ -1,4 +1,4 @@
-package PlayerCharacters;
+package playercharacters;
 
 public enum WeaponType {
     SWORD(10,0,0),

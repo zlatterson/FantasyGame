@@ -1,5 +1,5 @@
-import PlayerCharacters.Knight;
-import PlayerCharacters.WeaponType;
+import playercharacters.Knight;
+import playercharacters.WeaponType;
 import org.junit.Before;
 import org.junit.Test;
 

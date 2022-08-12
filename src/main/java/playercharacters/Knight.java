@@ -1,8 +1,6 @@
-package PlayerCharacters;
+package playercharacters;
 
-import Behaviours.IDefend;
-
-import java.util.ArrayList;
+import behaviours.IDefend;
 
 public class Knight extends Player {
 //    private ArrayList<SpellType> spells;

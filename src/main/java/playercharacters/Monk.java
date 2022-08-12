@@ -1,4 +1,4 @@
-package PlayerCharacters;
+package playercharacters;
 
 public class Monk extends Player{
     public Monk(String name, int health, int power, int magic, int clarity) {

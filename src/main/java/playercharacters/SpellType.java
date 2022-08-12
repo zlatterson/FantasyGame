@@ -1,4 +1,4 @@
-package PlayerCharacters;
+package playercharacters;
 
 public enum SpellType {
     STAB(20,0),
