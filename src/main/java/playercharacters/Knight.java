@@ -1,16 +1,17 @@
 package playercharacters;
 
 import behaviours.IDefend;
+import items.Item;
+
+import java.util.ArrayList;
 
 public class Knight extends Player {
 //    private ArrayList<SpellType> spells;
     private WeaponType currentWeapon;
-    public Knight(String name, int healthMax, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
-        super(name, healthMax, health, power, magic, clarity);
+
+    public Knight(String name, int maxHealth, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
+        super(name, maxHealth, health, power, magic, clarity);
         this.currentWeapon = currentWeapon;
-//        this.spells = new ArrayList<>();
-//        spells.add(SpellType.CLEAVE);
-//        spells.add(SpellType.STAB);
     }
 
     public WeaponType getCurrentWeapon() {

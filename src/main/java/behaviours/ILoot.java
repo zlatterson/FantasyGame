@@ -1,5 +1,5 @@
 package behaviours;
 
 public interface ILoot {
-    public void loot(IGiveItems deadTarget);
+    public void loot(IGiveItems lootTarget);
 }

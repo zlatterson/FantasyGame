@@ -1,3 +1,5 @@
+import items.Potion;
+import nonplayercharacters.Monster;
 import playercharacters.Knight;
 import playercharacters.WeaponType;
 import org.junit.Before;
@@ -8,10 +10,14 @@ import static org.junit.Assert.assertEquals;
 public class KnightTest {
     Knight knight;
     Knight victim;
+    Potion potion;
+    Monster monster;
     @Before
     public void before(){
+        potion = new Potion("Health Potion",30,30,100);
         knight = new Knight("Aragorn",100,100,10,0,0, WeaponType.SWORD);
         victim = new Knight("Timmy",100,100,10,0,0,WeaponType.SWORD);
+        monster = new Monster("Monster",100,10);
     }
     @Test
     public void hasSword(){
@@ -53,5 +59,14 @@ public class KnightTest {
         knight.setHealth(50);
         knight.useCleave(victim);
         assertEquals(60,knight.getHealth());
+    }
+    @Test
+    public void canLootItems(){
+        knight.useCleave(monster);
+        knight.useCleave(monster);
+        knight.useCleave(monster);
+        knight.useCleave(monster);
+        knight.loot(monster);
+        assertEquals(1,knight.getItems().size());
     }
 }

@@ -4,6 +4,9 @@ import behaviours.IBasicAttack;
 import behaviours.IDefend;
 import behaviours.IGiveItems;
 import behaviours.ILoot;
+import items.Item;
+
+import java.util.ArrayList;
 
 public abstract class Player implements IBasicAttack, IDefend, ILoot {
     private String name;
@@ -12,6 +15,7 @@ public abstract class Player implements IBasicAttack, IDefend, ILoot {
     private int power;
     private int magic;
     private int clarity;
+    private ArrayList<Item> items;
 
     public Player(String name, int maxHealth, int health, int power, int magic, int clarity) {
         this.name = name;
@@ -20,6 +24,7 @@ public abstract class Player implements IBasicAttack, IDefend, ILoot {
         this.power = power;
         this.magic = magic;
         this.clarity = clarity;
+        this.items = new ArrayList<>();
     }
 
     public String getName() {
@@ -66,6 +71,14 @@ public abstract class Player implements IBasicAttack, IDefend, ILoot {
         return clarity;
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+
     public void setClarity(int clarity) {
         this.clarity = clarity;
     }
@@ -82,7 +95,10 @@ public abstract class Player implements IBasicAttack, IDefend, ILoot {
             this.setHealth(health);
         }
     }
-    public void loot(IGiveItems deadTarget){
-
+    public void loot(IGiveItems lootTarget){
+        ArrayList<Item> newItems = lootTarget.giveItems();
+        for(Item item : newItems){
+            items.add(item);
+        }
     }
 }
