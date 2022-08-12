@@ -25,7 +25,7 @@ public class KnightTest {
     }
     @Test
     public void canAttackOtherPlayer(){
-        knight.attack(victim);
+        knight.basicAttack(victim);
         assertEquals(90,victim.getHealth());
     }
     @Test

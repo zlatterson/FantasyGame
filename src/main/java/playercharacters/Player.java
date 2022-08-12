@@ -2,8 +2,10 @@ package playercharacters;
 
 import behaviours.IBasicAttack;
 import behaviours.IDefend;
+import behaviours.IGiveItems;
+import behaviours.ILoot;
 
-public abstract class Player implements IBasicAttack, IDefend {
+public abstract class Player implements IBasicAttack, IDefend, ILoot {
     private String name;
     private int maxHealth;
     private int health;
@@ -67,7 +69,7 @@ public abstract class Player implements IBasicAttack, IDefend {
     public void setClarity(int clarity) {
         this.clarity = clarity;
     }
-    public void attack(IDefend defender){
+    public void basicAttack(IDefend defender){
         defender.takeDamage(this.getPower());
     }
 
@@ -79,5 +81,8 @@ public abstract class Player implements IBasicAttack, IDefend {
         }else {
             this.setHealth(health);
         }
+    }
+    public void loot(IGiveItems deadTarget){
+
     }
 }

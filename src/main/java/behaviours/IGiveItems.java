@@ -1,0 +1,9 @@
+package behaviours;
+
+import items.Item;
+
+import java.util.ArrayList;
+
+public interface IGiveItems {
+    public ArrayList giveItems(ArrayList<Item> items);
+}

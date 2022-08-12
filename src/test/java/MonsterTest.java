@@ -20,12 +20,12 @@ public class MonsterTest {
     }
     @Test
     public void canBasicAttack(){
-        monster.attack(knight);
+        monster.basicAttack(knight);
         assertEquals(90, knight.getHealth());
     }
     @Test
     public void canSubsequentlyGetDestroyedByKnight(){
-        monster.attack(knight);
+        monster.basicAttack(knight);
         knight.useCleave(monster);
         knight.useStab(monster);
         assertEquals(20,monster.getHealth());
