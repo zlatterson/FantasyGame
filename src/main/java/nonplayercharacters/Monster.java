@@ -3,12 +3,13 @@ package nonplayercharacters;
 import behaviours.IBasicAttack;
 import behaviours.IDefend;
 import behaviours.IGiveItems;
+import behaviours.IGiveMoney;
 import items.Item;
 import items.Potion;
 
 import java.util.ArrayList;
 
-public class Monster implements IBasicAttack, IDefend, IGiveItems {
+public class Monster implements IBasicAttack, IDefend, IGiveItems, IGiveMoney {
     private String name;
     private int health;
     private int power;
@@ -56,6 +57,14 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems {
         return items;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
@@ -69,5 +78,15 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems {
             lootItems = this.getItems();
         }
         return lootItems;
+    }
+    public int giveMoney(){
+        int runningTotal = 0;
+        if(this.getHealth() == 0){
+            runningTotal += this.getMoney();
+        }
+        return runningTotal;
+    }
+    public void clearMoney(){
+        setMoney(0);
     }
 }

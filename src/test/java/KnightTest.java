@@ -17,11 +17,11 @@ public class KnightTest {
     @Before
     public void before(){
         potion = new Potion("Health Potion",30,30,100);
-        knight = new Knight("Aragorn",0,100,100,10,0,0, WeaponType.SWORD);
-        victim = new Knight("Timmy",0,100,100,10,0,0,WeaponType.SWORD);
+        knight = new Knight("Aragorn",120,100,100,10,0,0, WeaponType.SWORD);
+        victim = new Knight("Timmy",3000,100,100,10,0,0,WeaponType.SWORD);
         strongKnight = new Knight("Sauron",0,100,100,1000,0,0,WeaponType.SWORD);
         monster = new Monster("Monster",10,100,10);
-        anotherMonster = new Monster("Monster",10,100,10);
+        anotherMonster = new Monster("Monster",15,100,10);
     }
     @Test
     public void hasSword(){
@@ -67,40 +67,62 @@ public class KnightTest {
     @Test
     public void canLootItems(){
         strongKnight.useCleave(monster);
-        strongKnight.loot(monster);
+        strongKnight.lootItems(monster);
         assertEquals(2,strongKnight.getItems().size());
     }
     @Test
     public void canOnlyLootDeadEnemies(){
         knight.useCleave(monster);
-        knight.loot(monster);
+        knight.lootItems(monster);
         assertEquals(0,knight.getItems().size());
     }
     @Test
     public void cannotLootTwice(){
         strongKnight.useCleave(monster);
-        knight.loot(monster);
-        knight.loot(monster);
+        knight.lootItems(monster);
+        knight.lootItems(monster);
         assertEquals(2,knight.getItems().size());
     }
     @Test
     public void canGetTotalItemsValue(){
         strongKnight.useCleave(monster);
-        knight.loot(monster);
+        knight.lootItems(monster);
         assertEquals(210,knight.getItemsValue());
     }
     @Test
     public void canGetLootedByOtherPlayers(){
         strongKnight.useCleave(monster);
-        strongKnight.loot(monster);
+        strongKnight.lootItems(monster);
         strongKnight.useCleave(anotherMonster);
-        strongKnight.loot(anotherMonster);
-        knight.useStab(strongKnight);
-        knight.useStab(strongKnight);
-        knight.useStab(strongKnight);
-        knight.useStab(strongKnight);
-        knight.useStab(strongKnight);
-        knight.loot(strongKnight);
+        strongKnight.lootItems(anotherMonster);
+        strongKnight.setHealth(0);
+        knight.lootItems(strongKnight);
         assertEquals(4,knight.getItems().size());
+    }
+    @Test
+    public void canLootDeadTargetsMoney(){
+        strongKnight.useCleave(monster);
+        strongKnight.lootMoney(monster);
+        assertEquals(10,strongKnight.getMoney());
+    }
+    @Test
+    public void canOnlyLootDeadTargetsMoneyOnce(){
+        strongKnight.useCleave(monster);
+        strongKnight.lootMoney(monster);
+        strongKnight.lootMoney(monster);
+        assertEquals(10,strongKnight.getMoney());
+    }
+    @Test
+    public void canLootPlayer(){
+        strongKnight.useCleave(victim);
+        strongKnight.lootMoney(victim);
+        strongKnight.lootMoney(victim);
+        assertEquals(3000,strongKnight.getMoney());
+    }
+    @Test
+    public void cannotLootAliveTarget(){
+        knight.useStab(strongKnight);
+        knight.lootMoney(strongKnight);
+        assertEquals(0,strongKnight.getMoney());
     }
 }

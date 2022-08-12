@@ -1,14 +1,11 @@
 package playercharacters;
 
-import behaviours.IBasicAttack;
-import behaviours.IDefend;
-import behaviours.IGiveItems;
-import behaviours.ILoot;
+import behaviours.*;
 import items.Item;
 
 import java.util.ArrayList;
 
-public abstract class Player implements IBasicAttack, IDefend, ILoot, IGiveItems {
+public abstract class Player implements IBasicAttack, IDefend, ILootItems, IGiveItems, ILootMoney, IGiveMoney {
     private String name;
     private int money;
     private int maxHealth;
@@ -101,7 +98,14 @@ public abstract class Player implements IBasicAttack, IDefend, ILoot, IGiveItems
     public void addItem(Item item){
         items.add(item);
     }
-    public void loot(IGiveItems lootTarget){
+    public int getItemsValue(){
+        int total = 0;
+        for(Item item : items){
+            total += item.getValue();
+        }
+        return total;
+    }
+    public void lootItems(IGiveItems lootTarget){
         ArrayList<Item> newItems = lootTarget.giveItems();
         for(Item item : newItems){
             addItem(item);
@@ -115,20 +119,31 @@ public abstract class Player implements IBasicAttack, IDefend, ILoot, IGiveItems
     public ArrayList giveItems(){
         ArrayList<Item> lootItems = new ArrayList<>();
         if(this.getHealth() == 0){
-            for(Item item : this.getItems()){
-                lootItems.add(item);
-            }
-//            items.clear();
-            System.out.println(lootItems);
-//            System.out.println(getItems());
+            lootItems = this.getItems();
         }
         return lootItems;
     }
-    public int getItemsValue(){
-        int total = 0;
-        for(Item item : items){
-            total += item.getValue();
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void lootMoney(IGiveMoney lootTarget) {
+        setMoney(getMoney() + lootTarget.giveMoney());
+        lootTarget.clearMoney();
+    }
+    public int giveMoney(){
+        int runningTotal = 0;
+        if(this.getHealth() == 0){
+            runningTotal += this.getMoney();
         }
-        return total;
+        return runningTotal;
+    }
+    public void clearMoney(){
+        setMoney(0);
     }
 }
