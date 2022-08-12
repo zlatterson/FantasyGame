@@ -20,5 +20,6 @@ public class ShopOwnerTest {
     @Test
     public void returnsItemPriceIfItemOfTheNameExists(){
         assertEquals(105, shopOwner.hasItem(potion));
+
     }
 }
