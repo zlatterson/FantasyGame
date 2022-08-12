@@ -12,12 +12,16 @@ public class KnightTest {
     Knight victim;
     Potion potion;
     Monster monster;
+    Knight strongKnight;
+    Monster anotherMonster;
     @Before
     public void before(){
         potion = new Potion("Health Potion",30,30,100);
         knight = new Knight("Aragorn",100,100,10,0,0, WeaponType.SWORD);
         victim = new Knight("Timmy",100,100,10,0,0,WeaponType.SWORD);
+        strongKnight = new Knight("Sauron",100,100,1000,0,0,WeaponType.SWORD);
         monster = new Monster("Monster",100,10);
+        anotherMonster = new Monster("Monster",100,10);
     }
     @Test
     public void hasSword(){
@@ -62,11 +66,41 @@ public class KnightTest {
     }
     @Test
     public void canLootItems(){
-        knight.useCleave(monster);
-        knight.useCleave(monster);
-        knight.useCleave(monster);
+        strongKnight.useCleave(monster);
+        strongKnight.loot(monster);
+        assertEquals(2,strongKnight.getItems().size());
+    }
+    @Test
+    public void canOnlyLootDeadEnemies(){
         knight.useCleave(monster);
         knight.loot(monster);
-        assertEquals(1,knight.getItems().size());
+        assertEquals(0,knight.getItems().size());
+    }
+    @Test
+    public void cannotLootTwice(){
+        strongKnight.useCleave(monster);
+        knight.loot(monster);
+        knight.loot(monster);
+        assertEquals(2,knight.getItems().size());
+    }
+    @Test
+    public void canGetTotalItemsValue(){
+        strongKnight.useCleave(monster);
+        knight.loot(monster);
+        assertEquals(210,knight.getItemsValue());
+    }
+    @Test
+    public void canGetLooted(){
+        strongKnight.useCleave(monster);
+        strongKnight.loot(monster);
+        strongKnight.useCleave(anotherMonster);
+        strongKnight.loot(anotherMonster);
+        knight.useStab(strongKnight);
+        knight.useStab(strongKnight);
+        knight.useStab(strongKnight);
+        knight.useStab(strongKnight);
+        knight.useStab(strongKnight);
+        knight.loot(strongKnight);
+        assertEquals(420,knight.getItemsValue());
     }
 }

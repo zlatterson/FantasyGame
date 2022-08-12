@@ -22,6 +22,7 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems {
         this.items = new ArrayList<>();
         potion = new Potion("Health Potion",105,20,100);
         items.add(potion);
+        items.add(potion);
     }
 
     public int getHealth() {
@@ -48,10 +49,27 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems {
             this.setHealth(health);
         }
     }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+    public void clearItems(){
+        this.items.clear();
+    }
+
     public ArrayList giveItems(){
         ArrayList<Item> lootItems = new ArrayList<>();
         if(this.getHealth() == 0){
-            lootItems = items;
+            for(Item item : this.getItems()){
+                lootItems.add(item);
+            }
+//            items.clear();
+            System.out.println(lootItems);
+//            System.out.println(getItems());
         }
         return lootItems;
     }

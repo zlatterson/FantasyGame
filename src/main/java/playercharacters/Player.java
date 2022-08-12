@@ -8,7 +8,7 @@ import items.Item;
 
 import java.util.ArrayList;
 
-public abstract class Player implements IBasicAttack, IDefend, ILoot {
+public abstract class Player implements IBasicAttack, IDefend, ILoot, IGiveItems {
     private String name;
     private int maxHealth;
     private int health;
@@ -95,10 +95,37 @@ public abstract class Player implements IBasicAttack, IDefend, ILoot {
             this.setHealth(health);
         }
     }
+    public void addItem(Item item){
+        items.add(item);
+    }
     public void loot(IGiveItems lootTarget){
         ArrayList<Item> newItems = lootTarget.giveItems();
         for(Item item : newItems){
-            items.add(item);
+            addItem(item);
         }
+        lootTarget.clearItems();
+    }
+    public void clearItems(){
+        this.items.clear();
+    }
+
+    public ArrayList giveItems(){
+        ArrayList<Item> lootItems = new ArrayList<>();
+        if(this.getHealth() == 0){
+            for(Item item : this.getItems()){
+                lootItems.add(item);
+            }
+//            items.clear();
+            System.out.println(lootItems);
+//            System.out.println(getItems());
+        }
+        return lootItems;
+    }
+    public int getItemsValue(){
+        int total = 0;
+        for(Item item : items){
+            total += item.getValue();
+        }
+        return total;
     }
 }
