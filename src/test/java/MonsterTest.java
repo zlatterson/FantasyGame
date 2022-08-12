@@ -11,8 +11,8 @@ public class MonsterTest {
     Knight knight;
     @Before
     public void before(){
-        monster = new Monster("Goblin",100,10);
-        knight = new Knight("Gimli",100,100,10,0,0, WeaponType.AXE);
+        monster = new Monster("Goblin",10,100,10);
+        knight = new Knight("Gimli",0,100,100,10,0,0, WeaponType.AXE);
     }
     @Test
     public void hasHealth(){

@@ -9,8 +9,8 @@ public class Knight extends Player {
 //    private ArrayList<SpellType> spells;
     private WeaponType currentWeapon;
 
-    public Knight(String name, int maxHealth, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
-        super(name, maxHealth, health, power, magic, clarity);
+    public Knight(String name, int money, int maxHealth, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
+        super(name, money, maxHealth, health, power, magic, clarity);
         this.currentWeapon = currentWeapon;
     }
 

@@ -17,11 +17,11 @@ public class KnightTest {
     @Before
     public void before(){
         potion = new Potion("Health Potion",30,30,100);
-        knight = new Knight("Aragorn",100,100,10,0,0, WeaponType.SWORD);
-        victim = new Knight("Timmy",100,100,10,0,0,WeaponType.SWORD);
-        strongKnight = new Knight("Sauron",100,100,1000,0,0,WeaponType.SWORD);
-        monster = new Monster("Monster",100,10);
-        anotherMonster = new Monster("Monster",100,10);
+        knight = new Knight("Aragorn",0,100,100,10,0,0, WeaponType.SWORD);
+        victim = new Knight("Timmy",0,100,100,10,0,0,WeaponType.SWORD);
+        strongKnight = new Knight("Sauron",0,100,100,1000,0,0,WeaponType.SWORD);
+        monster = new Monster("Monster",10,100,10);
+        anotherMonster = new Monster("Monster",10,100,10);
     }
     @Test
     public void hasSword(){
@@ -90,7 +90,7 @@ public class KnightTest {
         assertEquals(210,knight.getItemsValue());
     }
     @Test
-    public void canGetLooted(){
+    public void canGetLootedByOtherPlayers(){
         strongKnight.useCleave(monster);
         strongKnight.loot(monster);
         strongKnight.useCleave(anotherMonster);
@@ -101,6 +101,6 @@ public class KnightTest {
         knight.useStab(strongKnight);
         knight.useStab(strongKnight);
         knight.loot(strongKnight);
-        assertEquals(420,knight.getItemsValue());
+        assertEquals(4,knight.getItems().size());
     }
 }

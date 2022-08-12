@@ -13,7 +13,7 @@ public class PotionTest {
 
     @Before
     public void before(){
-        knight = new Knight("Faramir",100,20,10,0,0, WeaponType.SWORD);
+        knight = new Knight("Faramir",10,100,20,10,0,0, WeaponType.SWORD);
         potion = new Potion("Health Potion",239,50, 100);
     }
     @Test
@@ -44,7 +44,7 @@ public class PotionTest {
     }
     @Test
     public void cannotHealPastMaxHealth(){
-        boromir = new Knight("Boromir",100,75,10,0,0, WeaponType.SWORD);
+        boromir = new Knight("Boromir",10,100,75,10,0,0, WeaponType.SWORD);
         potion.heal(boromir);
         assertEquals(100,boromir.getHealth());
     }

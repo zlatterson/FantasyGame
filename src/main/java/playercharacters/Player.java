@@ -10,15 +10,18 @@ import java.util.ArrayList;
 
 public abstract class Player implements IBasicAttack, IDefend, ILoot, IGiveItems {
     private String name;
+    private int money;
     private int maxHealth;
     private int health;
     private int power;
     private int magic;
     private int clarity;
+
     private ArrayList<Item> items;
 
-    public Player(String name, int maxHealth, int health, int power, int magic, int clarity) {
+    public Player(String name,int money, int maxHealth, int health, int power, int magic, int clarity) {
         this.name = name;
+        this.money = money;
         this.maxHealth = maxHealth;
         this.health = health;
         this.power = power;

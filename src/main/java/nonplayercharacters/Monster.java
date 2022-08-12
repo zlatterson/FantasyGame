@@ -12,11 +12,13 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems {
     private String name;
     private int health;
     private int power;
+    private int money;
     private ArrayList<Item> items;
     Potion potion;
 
-    public Monster(String name, int health, int power) {
+    public Monster(String name, int money, int health, int power) {
         this.name = name;
+        this.money = money;
         this.health = health;
         this.power = power;
         this.items = new ArrayList<>();
@@ -64,12 +66,7 @@ public class Monster implements IBasicAttack, IDefend, IGiveItems {
     public ArrayList giveItems(){
         ArrayList<Item> lootItems = new ArrayList<>();
         if(this.getHealth() == 0){
-            for(Item item : this.getItems()){
-                lootItems.add(item);
-            }
-//            items.clear();
-            System.out.println(lootItems);
-//            System.out.println(getItems());
+            lootItems = this.getItems();
         }
         return lootItems;
     }
