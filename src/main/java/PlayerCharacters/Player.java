@@ -1,6 +1,9 @@
 package PlayerCharacters;
 
-public abstract class Player implements IAttack, IDefend{
+import Behaviours.IAttack;
+import Behaviours.IDefend;
+
+public abstract class Player implements IAttack, IDefend {
     private String name;
     private int health;
     private int power;

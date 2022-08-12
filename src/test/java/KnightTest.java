@@ -38,6 +38,20 @@ public class KnightTest {
     @Test
     public void canStabOtherPlayer(){
         knight.useStab(victim);
-        assertEquals(80,victim.getHealth());
+        assertEquals(70,victim.getHealth());
+    }
+    @Test
+    public void healthRemains0WhenDead(){
+        knight.setCurrentWeapon(WeaponType.AXE);
+        knight.useCleave(victim);
+        knight.useCleave(victim);
+        knight.useCleave(victim);
+        assertEquals(0, victim.getHealth());
+    }
+    @Test
+    public void cleaveHeals(){
+        knight.setHealth(50);
+        knight.useCleave(victim);
+        assertEquals(60,knight.getHealth());
     }
 }

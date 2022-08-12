@@ -2,7 +2,7 @@ package PlayerCharacters;
 
 public enum WeaponType {
     SWORD(10,0,0),
-    AXE(12,0,0),
+    AXE(20,0,0),
     WAND(1,10,0),
     STAFF(3,5,10);
     private final int power;
