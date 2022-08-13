@@ -1,11 +1,10 @@
 package rooms;
 
+import items.Chest;
 import nonplayercharacters.Monster;
-import nonplayercharacters.QuestGiver;
 import nonplayercharacters.ShopOwner;
 import playercharacters.Player;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Room {
@@ -15,12 +14,28 @@ public class Room {
     private ArrayList<Monster> monsters;
     private ArrayList<ShopOwner> shopOwners;
 
+    private ArrayList<Chest> chests;
     public Room(String name) {
         this.name = name;
         this.playerMaxCapacity = 20;
         this.players = new ArrayList<>();
         this.monsters = new ArrayList<>();
         this.shopOwners = new ArrayList<>();
+        this.chests = new ArrayList<>();
+    }
+
+    public ArrayList<Chest> getChests() {
+        return chests;
+    }
+
+    public void addChest(Chest chest) {
+        this.chests.add(chest);
+    }
+    public Chest getChest(Chest chest){
+        if(chests.contains(chest)){
+            return chest;
+        }
+        return null;
     }
 
     public int getPlayerMaxCapacity() {
@@ -47,7 +62,7 @@ public class Room {
     public void addShopOwner(ShopOwner shopOwner){
         shopOwners.add(shopOwner);
     }
-    
+
     public boolean isCleared(){
         for(Monster monster : getMonsters()){
             if(monster.getHealth() != 0){

@@ -1,3 +1,4 @@
+import items.Chest;
 import items.Potion;
 import nonplayercharacters.Monster;
 import nonplayercharacters.ShopOwner;
@@ -19,6 +20,7 @@ public class RoomTest {
     Potion potion;
     Monster monster;
     ShopOwner shopOwner;
+    Chest chest;
     @Before
     public void before(){
         room = new Room("Forest");
@@ -29,6 +31,7 @@ public class RoomTest {
         room.addMonster(monster);
         room.addPlayer(knight);
         room.addShopOwner(shopOwner);
+        chest = new Chest("Large Chest",50);
     }
     @Test
     public void canAddMonster(){
@@ -38,10 +41,28 @@ public class RoomTest {
     @Test
     public void canClearRoom(){
         wizard.useFireball(monster);
+        wizard.lootMoney(monster);
         assertEquals(true, room.isCleared());
     }
     @Test
     public void roomWontClearIfMonsterIsAlive(){
         assertEquals(false,room.isCleared());
+    }
+    @Test
+    public void fun(){
+        wizard.useFireball(monster);
+        wizard.lootMoney(monster);
+        assertEquals(212,wizard.getMoney());
+    }
+    @Test
+    public void canAddChest(){
+        room.addChest(chest);
+        assertEquals(1,room.getChests().size());
+    }
+    @Test
+    public void wizardCanLootMoneyFromChestInRoom(){
+        room.addChest(chest);
+        wizard.lootMoney(room.getChest(chest));
+        assertEquals(250, wizard.getMoney());
     }
 }
