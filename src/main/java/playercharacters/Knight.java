@@ -22,13 +22,13 @@ public class Knight extends Player {
     }
 
     public void useCleave(IDefend defender){
-        int payload = this.getPower() + this.currentWeapon.getPower() + SpellType.CLEAVE.getDamage();
+        int payload = this.getPower() + getCurrentWeapon().getPower() + SpellType.CLEAVE.getDamage();
         this.setHealth(this.getHealth() + SpellType.CLEAVE.getHeal());
         defender.takeDamage(payload);
     }
 
     public void useStab(IDefend defender){
-        int payload = this.currentWeapon.getPower() + SpellType.STAB.getDamage() * 2 - 20;
+        int payload = getCurrentWeapon().getPower() + SpellType.STAB.getDamage() * 2 - 20;
         defender.takeDamage(payload);
     }
 

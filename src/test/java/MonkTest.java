@@ -57,5 +57,23 @@ public class MonkTest {
         monk.heal(knight);
         assertEquals(100,knight.getHealth());
     }
+    @Test
+    public void canDamageWithSmite(){
+        monk.useSmite(knight);
+        assertEquals(15, knight.getHealth());
+    }
+    @Test
+    public void canHaveAnEpicFight(){
+        monk.useSmite(knight);
+        knight.useCleave(monk);
+        monk.useHealSelf();
+        monk.useSmite(knight);
+        knight.useCleave(monk);
+        monk.basicAttack(knight);
+        knight.useStab(monk);
+        knight.lootMoney(monk);
+        knight.lootItems(monk);
+        assertEquals(0, monk.getMoney());
+    }
 
 }
