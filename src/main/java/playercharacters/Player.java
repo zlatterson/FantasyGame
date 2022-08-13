@@ -2,6 +2,7 @@ package playercharacters;
 
 import behaviours.*;
 import items.Item;
+import nonplayercharacters.ShopOwner;
 
 import java.util.ArrayList;
 
@@ -145,4 +146,29 @@ public abstract class Player implements IBasicAttack, IDefend, ILootItems, IGive
     public void clearMoney(){
         setMoney(0);
     }
+    public boolean hasItem(Item item){
+        for(Item myItem : this.items){
+            if (myItem.getName() == item.getName() && myItem.getValue() == item.getValue()){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void sellToShop(ShopOwner shopOwner, Item item){
+        if(hasItem(item)){
+            shopOwner.setMoney(shopOwner.getMoney() - item.getValue());
+            setMoney(getMoney() + item.getValue());
+            shopOwner.getItems().add(item);
+            this.items.remove(item);
+        }
+    }
+    public void buyFromShop(ShopOwner shopOwner, Item item){
+        if(shopOwner.hasItem(item)) {
+            shopOwner.setMoney(shopOwner.getMoney() + item.getValue());
+            setMoney(getMoney() - item.getValue());
+            shopOwner.getItems().remove(item);
+            this.items.add(item);
+        }
+    }
+
 }

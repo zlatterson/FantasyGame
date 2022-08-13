@@ -22,13 +22,28 @@ public class ShopOwner {
         return this.items.size();
     }
 
-    public int hasItem(Item item){
-        for(Item shopItem : this.items){
-            if (shopItem.getName() == item.getName()){
-                return shopItem.getValue();
-            }
-        }
-        return 0;
+    public int getMoney() {
+        return money;
     }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public boolean hasItem(Item item){
+        for(Item shopItem : this.items){
+            if (shopItem.getName() == item.getName() && shopItem.getValue() == item.getValue()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
 }

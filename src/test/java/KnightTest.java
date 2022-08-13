@@ -1,5 +1,6 @@
 import items.Potion;
 import nonplayercharacters.Monster;
+import nonplayercharacters.ShopOwner;
 import playercharacters.Knight;
 import playercharacters.WeaponType;
 import org.junit.Before;
@@ -14,6 +15,7 @@ public class KnightTest {
     Monster monster;
     Knight strongKnight;
     Monster anotherMonster;
+    ShopOwner shopOwner;
     @Before
     public void before(){
         potion = new Potion("Health Potion",30,30,100);
@@ -124,5 +126,32 @@ public class KnightTest {
         knight.useStab(strongKnight);
         knight.lootMoney(strongKnight);
         assertEquals(0,strongKnight.getMoney());
+    }
+    @Test
+    public void moneyIncreasesWhenSellingToShop(){
+        shopOwner = new ShopOwner("Shop",100);
+        knight.addItem(potion);
+        knight.sellToShop(shopOwner,potion);
+        assertEquals(150, knight.getMoney());
+    }
+    @Test
+    public void cantSellItemPlayerDoesNotHave(){
+        shopOwner = new ShopOwner("Shop",100);
+        knight.sellToShop(shopOwner,potion);
+        assertEquals(120, knight.getMoney());
+    }
+    @Test
+    public void canBuyItemFromShop(){
+        potion = new Potion("Health Potion",105,20,100);
+        shopOwner = new ShopOwner("Shop",100);
+        knight.buyFromShop(shopOwner, potion);
+        assertEquals(1, knight.getItems().size());
+    }
+    @Test
+    public void moneyReducesUponPurchase(){
+        potion = new Potion("Health Potion",105,20,100);
+        shopOwner = new ShopOwner("Shop",100);
+        knight.buyFromShop(shopOwner, potion);
+        assertEquals(15, knight.getMoney());
     }
 }
