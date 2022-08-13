@@ -6,7 +6,6 @@ import items.Item;
 import java.util.ArrayList;
 
 public class Knight extends Player {
-//    private ArrayList<SpellType> spells;
     private WeaponType currentWeapon;
 
     public Knight(String name, int money, int maxHealth, int health, int power, int magic, int clarity, WeaponType currentWeapon) {
