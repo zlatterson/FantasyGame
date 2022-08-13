@@ -1,5 +1,7 @@
 package playercharacters;
 
+import behaviours.IDefend;
+
 public class Wizard extends Player{
     private WeaponType currentWeapon;
     private PetType currentPet;
@@ -23,15 +25,15 @@ public class Wizard extends Player{
         this.currentPet = newPet;
     }
 
-    public void useFireball(Player player) {
+    public void useFireball(IDefend defender) {
         int payload = getCurrentWeapon().getMagic() + getMagic() * 3 - 20;
-        player.takeDamage(payload);
+        defender.takeDamage(payload);
     }
-    public void usePetAttack(Player player){
+    public void usePetAttack(IDefend defender){
         int payload = 0;
         if(getCurrentPet() != null){
             payload += currentPet.getPower();
         }
-        player.takeDamage(payload);
+        defender.takeDamage(payload);
     }
 }
