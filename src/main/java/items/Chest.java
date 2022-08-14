@@ -24,6 +24,9 @@ public class Chest implements IGiveItems, IGiveMoney {
     public void setMoney(int money) {
         this.money = money;
     }
+    public void addItem(Item item){
+        this.items.add(item);
+    }
 
     public ArrayList<Item> getItems() {
         return items;

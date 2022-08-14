@@ -107,6 +107,7 @@ public abstract class Player implements IBasicAttack, IDefend, ILootItems, IGive
     }
     public void lootItems(IGiveItems lootTarget){
         ArrayList<Item> newItems = lootTarget.giveItems();
+        System.out.println(newItems);
         for(Item item : newItems){
             addItem(item);
         }
@@ -158,9 +159,15 @@ public abstract class Player implements IBasicAttack, IDefend, ILootItems, IGive
         if(hasItem(item)){
             shopOwner.setMoney(shopOwner.getMoney() - item.getValue());
             setMoney(getMoney() + item.getValue());
-            shopOwner.getItems().add(item);
+            shopOwner.addItem(item);
             this.items.remove(item);
         }
+    }
+    public void sellAllToShop(ShopOwner shopOwner){
+        shopOwner.setMoney(shopOwner.getMoney() - getItemsValue());
+        setMoney(getMoney() + getItemsValue());
+        shopOwner.addItems(this.items);
+        this.items.clear();
     }
     public void buyFromShop(ShopOwner shopOwner, Item item){
         if(shopOwner.hasItem(item)) {

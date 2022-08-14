@@ -29,6 +29,12 @@ public class ShopOwner {
     public void setMoney(int money) {
         this.money = money;
     }
+    public void addItem(Item item){
+        this.items.add(item);
+    }
+    public void addItems(ArrayList<Item> items){
+        this.items.addAll(items);
+    }
 
     public boolean hasItem(Item item){
         for(Item shopItem : this.items){

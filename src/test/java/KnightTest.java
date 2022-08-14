@@ -154,4 +154,13 @@ public class KnightTest {
         knight.buyFromShop(shopOwner, potion);
         assertEquals(15, knight.getMoney());
     }
+    @Test
+    public void canSellAllItemsToShop(){
+        potion = new Potion("Health Potion",105,20,100);
+        shopOwner = new ShopOwner("Shop",100);
+        knight.addItem(potion);
+        knight.addItem(potion);
+        knight.sellAllToShop(shopOwner);
+        assertEquals(330, knight.getMoney());
+    }
 }

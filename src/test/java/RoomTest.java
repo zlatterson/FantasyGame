@@ -32,6 +32,7 @@ public class RoomTest {
         room.addPlayer(knight);
         room.addShopOwner(shopOwner);
         chest = new Chest("Large Chest",50);
+        potion = new Potion("Health Potion",100,50,100);
     }
     @Test
     public void canAddMonster(){
@@ -60,9 +61,26 @@ public class RoomTest {
         assertEquals(1,room.getChests().size());
     }
     @Test
-    public void wizardCanLootMoneyFromChestInRoom(){
+    public void playerCanLootMoneyFromChestInRoom(){
         room.addChest(chest);
         wizard.lootMoney(room.getChest(chest));
         assertEquals(250, wizard.getMoney());
     }
+    @Test
+    public void playerCanLootItemsFromChestInRoom(){
+        room.addChest(chest);
+        chest.addItem(potion);
+        chest.addItem(potion);
+        wizard.lootItems(room.getChest(chest));
+        assertEquals(2, wizard.getItems().size());
+    }
+    @Test
+    public void playerCanSellToVendorInRoom(){
+        room.addChest(chest);
+        chest.addItem(potion);
+        wizard.lootItems(room.getChest(chest));
+        wizard.sellAllToShop(shopOwner);
+        assertEquals(300, wizard.getMoney());
+    }
+
 }
