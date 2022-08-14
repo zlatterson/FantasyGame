@@ -107,7 +107,6 @@ public abstract class Player implements IBasicAttack, IDefend, ILootItems, IGive
     }
     public void lootItems(IGiveItems lootTarget){
         ArrayList<Item> newItems = lootTarget.giveItems();
-        System.out.println(newItems);
         for(Item item : newItems){
             addItem(item);
         }

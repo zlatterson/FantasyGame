@@ -32,7 +32,7 @@ public class Chest implements IGiveItems, IGiveMoney {
         return items;
     }
 
-    public ArrayList giveItems(){
+    public ArrayList<Item> giveItems(){
         return this.getItems();
     }
     public int giveMoney(){

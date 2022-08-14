@@ -1,5 +1,6 @@
 import items.Chest;
 import items.Potion;
+import nonplayercharacters.Boss;
 import nonplayercharacters.Monster;
 import nonplayercharacters.ShopOwner;
 import org.junit.Before;
@@ -21,15 +22,19 @@ public class RoomTest {
     Monster monster;
     ShopOwner shopOwner;
     Chest chest;
+    Boss sauron;
     @Before
     public void before(){
         room = new Room("Forest");
         knight = new Knight("Aragorn",120,100,100,10,0,0, WeaponType.SWORD);
         wizard = new Wizard("Gandalf",200,100,100,10,1000,0,WeaponType.WAND);
+        monk = new Monk("Monk",56,100,40,5,0,10, WeaponType.STAFF);
         monster = new Monster("Goblin",12,20,10);
         shopOwner = new ShopOwner("Harry",2000);
         room.addMonster(monster);
+        room.addPlayer(wizard);
         room.addPlayer(knight);
+        room.addPlayer(monk);
         room.addShopOwner(shopOwner);
         chest = new Chest("Large Chest",50);
         potion = new Potion("Health Potion",100,50,100);
@@ -81,6 +86,39 @@ public class RoomTest {
         wizard.lootItems(room.getChest(chest));
         wizard.sellAllToShop(shopOwner);
         assertEquals(300, wizard.getMoney());
+    }
+    @Test
+    public void bossCanBeAdded(){
+        sauron = new Boss("Sauron",1000,1000,1000);
+        room.addMonster(sauron);
+        assertEquals(true,room.getMonsters().contains(sauron));
+    }
+    @Test
+    public void bossCanAoeAttackPlayers(){
+        sauron = new Boss("Sauron",1000,1000,1000);
+        room.addMonster(sauron);
+        sauron.useAoeAttack(room.getPlayers());
+        assertEquals(67,knight.getHealth());
+    }
+    @Test
+    public void bossCanAttackStrongestPlayer(){
+        sauron = new Boss("Sauron",1000,1000,1000);
+        room.addMonster(sauron);
+        wizard.setHealth(1);
+        monk.setHealth(1);
+        knight.setHealth(60);
+        sauron.useSmash(room.getPlayers());
+        assertEquals(10,knight.getHealth());
+    }
+    @Test
+    public void bossSmashOnlyAttacksStrongestPlayer(){
+        sauron = new Boss("Sauron",1000,1000,1000);
+        room.addMonster(sauron);
+        wizard.setHealth(1);
+        monk.setHealth(1);
+        knight.setHealth(60);
+        sauron.useSmash(room.getPlayers());
+        assertEquals(1,monk.getHealth());
     }
 
 }
