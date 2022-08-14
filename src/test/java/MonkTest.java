@@ -75,5 +75,11 @@ public class MonkTest {
         knight.lootItems(monk);
         assertEquals(0, monk.getMoney());
     }
+    @Test
+    public void cannotHealDeadTarget(){
+        knight.setHealth(0);
+        monk.heal(knight);
+        assertEquals(0, knight.getHealth());
+    }
 
 }

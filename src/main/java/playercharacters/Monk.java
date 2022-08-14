@@ -31,11 +31,13 @@ public class Monk extends Player implements IHeal {
     }
 
     public void heal(Player player) {
-        int healPayload = getCurrentWeapon().getClarity() + this.getClarity();
-        if (player.getHealth() + healPayload >= player.getMaxHealth()){
-            player.setHealth(player.getMaxHealth());
-        }else{
-            player.setHealth(player.getHealth() + healPayload);
+        if(player.isAlive()) {
+            int healPayload = getCurrentWeapon().getClarity() + this.getClarity();
+            if (player.getHealth() + healPayload >= player.getMaxHealth()) {
+                player.setHealth(player.getMaxHealth());
+            } else {
+                player.setHealth(player.getHealth() + healPayload);
+            }
         }
     }
     public void useSmite(IDefend defender){

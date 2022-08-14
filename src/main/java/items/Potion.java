@@ -24,7 +24,7 @@ public class Potion extends Item implements IHeal {
         return healAmount;
     }
     public void heal(Player player){
-        if(this.getVolume() >= 100){
+        if(this.getVolume() >= 100 && player.isAlive()){
             this.setVolume(0);
             this.setValue(this.getValue() - this.getValue());
             int healPayload = player.getHealth() + this.getHealAmount();

@@ -176,5 +176,8 @@ public abstract class Player implements IBasicAttack, IDefend, ILootItems, IGive
             this.items.add(item);
         }
     }
+    public boolean isAlive(){
+        return this.getHealth() != 0;
+    }
 
 }

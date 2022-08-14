@@ -48,5 +48,11 @@ public class PotionTest {
         potion.heal(boromir);
         assertEquals(100,boromir.getHealth());
     }
+    @Test
+    public void cannotHealDeadTarget(){
+        knight.setHealth(0);
+        potion.heal(knight);
+        assertEquals(0, knight.getHealth());
+    }
 
 }
